@@ -28,8 +28,14 @@ const MobileAppPromotion: React.FC = () => {
   }, []);
 
   const handleDownload = () => {
-    // Open the download page in a new tab
-    window.open(apkDownloadUrl, '_blank');
+    // Create a temporary link element and trigger direct APK download
+    const link = document.createElement('a');
+    link.href = apkDownloadUrl;
+    link.download = 'afya-tracker.apk';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -53,7 +59,7 @@ const MobileAppPromotion: React.FC = () => {
               startIcon={<Download />}
               onClick={handleDownload}
             >
-              Download Android APK
+              Download APK Now
             </Button>
             <Button
               variant="outlined"
@@ -61,7 +67,7 @@ const MobileAppPromotion: React.FC = () => {
               startIcon={<QrCode />}
               onClick={() => window.open(apkDownloadUrl, '_blank')}
             >
-              View Download Link
+              Direct APK Link
             </Button>
           </Box>
         </Box>
