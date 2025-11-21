@@ -6,8 +6,8 @@ import QRCode from 'qrcode';
 const MobileAppPromotion: React.FC = () => {
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
 
-  // APK download page URL - Update this with your deployed domain
-  const apkDownloadUrl = `${window.location.origin}/download.html`;
+  // Direct APK download URL from GitHub releases
+  const apkDownloadUrl = 'https://github.com/Awemick/afya_tracker_web_app/releases/download/vr.1.0/afya-tracker.apk';
 
   useEffect(() => {
     // Generate QR code for APK download

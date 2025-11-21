@@ -104,7 +104,7 @@
             <strong>⚠️ Installation Note:</strong> You may need to enable "Install from Unknown Sources" in your Android settings to install this APK.
         </div>
 
-        <a href="./afya-tracker.apk" class="download-btn" download>
+        <a href="https://github.com/Awemick/afya_tracker_web_app/releases/download/vr.1.0/afya-tracker.apk" class="download-btn" download>
             📱 Download APK (Android)
         </a>
 
@@ -131,10 +131,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
-        // Generate QR code for this download page
-        const currentUrl = window.location.href;
+        // Generate QR code for direct APK download
+        const apkUrl = 'https://github.com/Awemick/afya_tracker_web_app/releases/download/vr.1.0/afya-tracker.apk';
         new QRCode(document.getElementById("qr-code"), {
-            text: currentUrl,
+            text: apkUrl,
             width: 150,
             height: 150,
             colorDark: "#0A8D92",
