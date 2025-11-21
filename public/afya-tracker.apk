@@ -1,0 +1,15 @@
+This is a placeholder file. Replace this with your actual Afya Tracker APK file.
+
+To create the real APK:
+1. Open your Flutter project (afya_tracker mobile app)
+2. Run: flutter build apk --release
+3. Copy the generated APK from build/app/outputs/flutter-apk/app-release.apk
+4. Replace this placeholder file with the real APK
+5. Rename it to "afya-tracker.apk"
+
+For hosting options:
+- GitHub Releases: Upload APK to a release
+- Firebase Hosting: Host in a storage bucket
+- Any file hosting service that allows direct downloads
+
+Update the download.html file with your actual hosting URL if needed.

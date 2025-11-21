@@ -1,8 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Paper, Typography, Button } from '@mui/material';
 import { Smartphone, Download, QrCode } from '@mui/icons-material';
+import QRCode from 'qrcode';
 
 const MobileAppPromotion: React.FC = () => {
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>('');
+
+  // APK download page URL - Update this with your deployed domain
+  const apkDownloadUrl = `${window.location.origin}/download.html`;
+
+  useEffect(() => {
+    // Generate QR code for APK download
+    QRCode.toDataURL(apkDownloadUrl, {
+      width: 120,
+      margin: 1,
+      color: {
+        dark: '#1976d2', // Primary color
+        light: '#ffffff' // White background
+      }
+    })
+      .then(url => {
+        setQrCodeDataUrl(url);
+      })
+      .catch(err => {
+        console.error('Error generating QR code:', err);
+      });
+  }, []);
+
+  const handleDownload = () => {
+    // Open the download page in a new tab
+    window.open(apkDownloadUrl, '_blank');
+  };
+
   return (
     <Paper sx={{ p: 3, mb: 3, backgroundColor: 'primary.main', color: 'white' }}>
       <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} alignItems="center" gap={3}>
@@ -17,13 +46,24 @@ const MobileAppPromotion: React.FC = () => {
             Download the Afya Tracker mobile app for complete features including
             fetal kick counting, emergency alerts, and direct messaging with your healthcare provider.
           </Typography>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: 'white', color: 'primary.main' }}
-            startIcon={<Download />}
-          >
-            Download App
-          </Button>
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: 'white', color: 'primary.main' }}
+              startIcon={<Download />}
+              onClick={handleDownload}
+            >
+              Download Android APK
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ borderColor: 'white', color: 'white' }}
+              startIcon={<QrCode />}
+              onClick={() => window.open(apkDownloadUrl, '_blank')}
+            >
+              View Download Link
+            </Button>
+          </Box>
         </Box>
         <Box textAlign="center">
           <Box
@@ -36,12 +76,25 @@ const MobileAppPromotion: React.FC = () => {
               justifyContent: 'center',
               margin: '0 auto',
               borderRadius: 2,
+              cursor: 'pointer',
             }}
+            onClick={() => window.open(apkDownloadUrl, '_blank')}
           >
-            <QrCode sx={{ fontSize: 80, color: 'primary.main' }} />
+            {qrCodeDataUrl ? (
+              <img
+                src={qrCodeDataUrl}
+                alt="Download Afya Tracker APK"
+                style={{ width: '100%', height: '100%', borderRadius: '8px' }}
+              />
+            ) : (
+              <QrCode sx={{ fontSize: 80, color: 'primary.main' }} />
+            )}
           </Box>
           <Typography variant="caption" sx={{ color: 'white', mt: 1 }}>
-            Scan to download
+            Scan QR code to download APK
+          </Typography>
+          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.7)', display: 'block', mt: 0.5 }}>
+            Or click to open download link
           </Typography>
         </Box>
       </Box>
